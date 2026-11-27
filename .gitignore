@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build outputs & extension packages / signing keys
+dist/
+*.crx
+*.pem
+
+# Environment & local secrets
+.env
+.env.local
+.env.*
+
+# Logs & OS junk
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

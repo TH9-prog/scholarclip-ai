@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "ScholarClip AI",
+  "version": "0.1.0",
+  "description": "一键提取学术网页内容，AI 结构化总结并生成 APA / IEEE 引用，写入你的 Notion 数据库。",
+  "action": {
+    "default_title": "ScholarClip AI",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://api.notion.com/*"],
+  "optional_host_permissions": ["https://*/*", "http://*/*"],
+  "minimum_chrome_version": "116"
+}
