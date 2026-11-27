@@ -5,6 +5,7 @@ node_modules/
 dist/
 *.crx
 *.pem
+*.zip
 
 # Environment & local secrets
 .env

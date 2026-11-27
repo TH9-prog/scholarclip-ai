@@ -1,0 +1,113 @@
+<h1 align="center">📚 ScholarClip AI</h1>
+
+<p align="center"><strong>一键剪藏学术论文 → AI 结构化总结 → 写入 Notion</strong></p>
+
+<p align="center"><em>Clip scholarly papers, summarize them with any LLM, and save to Notion — in one click.</em></p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/version-0.1.0-4F46E5?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/Chrome-Extension-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome Extension">
+  <img src="https://img.shields.io/badge/LLM-OpenAI%20Compatible-10A37F?style=flat-square&logo=openai&logoColor=white" alt="OpenAI Compatible">
+  <img src="https://img.shields.io/badge/Notion-Database%20Sync-000000?style=flat-square&logo=notion&logoColor=white" alt="Notion Database Sync">
+  <img src="https://img.shields.io/badge/tests-29%20passing-22C55E?style=flat-square" alt="29 tests passing">
+</p>
+
+<p align="center"><a href="#zh"><strong>🇨🇳 中文</strong></a> · <a href="#en"><strong>🇬🇧 English</strong></a></p>
+
+| 🧩 插件弹窗 · Extension Popup | 🗂️ Notion 写入效果 · Notion Output |
+| :---: | :---: |
+| ![ScholarClip AI 弹窗预览](./docs/images/popup-preview.jpg) | ![Notion 页面写入效果](./docs/images/notion-result.jpg) |
+
+---
+
+<a id="zh"></a>
+
+## 🇨🇳 中文说明
+
+> **一句话介绍**：一键提取学术网页（arXiv / Google Scholar / IEEE Xplore / ACM DL 及通用学术页面）的正文与元数据，调用任意 OpenAI 兼容大模型生成**防幻觉**结构化总结与 **APA 7th / IEEE** 引用，并一键写入你的 Notion 数据库。
+
+### ✨ 核心功能
+
+| | 功能 | 说明 |
+| :---: | :--- | :--- |
+| 🔍 | **多平台学术网页智能提取** | 内置 arXiv、Google Scholar、IEEE Xplore、ACM DL 专用提取器，结合 Highwire (`citation_*`) / Dublin Core / Open Graph 元数据与 `@mozilla/readability` 正文提取；支持手动选中 ≥200 字文本优先提取，自动拦截空白 / 付费墙页面，防止模型胡编。 |
+| 🛡️ | **防幻觉 & 强鲁棒 JSON 解析** | 严格 Prompt 约束，禁止凭记忆编造缺失字段或指标；内置平衡括号状态机、引号感知的控制字符清洗、截断检测与自动重试，兼容 DeepSeek-R1 等输出 `<think>` 推理过程的模型。 |
+| ✏️ | **结构化预览与微调** | 400px 极简学术风弹窗，可实时修改标题、作者、年份、标签、TL;DR、研究方法、核心发现；APA 7th & IEEE 引用一键复制；自动保存会话草稿，关闭弹窗也不丢失。 |
+| 🗂️ | **Notion 数据库自适应写入** | 自动匹配中英文属性名（Title / Authors / Year / URL / Tags / Citation / Venue / DOI），跳过未配置字段；自动生成带 Callout、二级标题和要点列表的页面正文。 |
+| 🔒 | **隐私优先 & 中英双语设置页** | 无后端服务器，浏览器本地直连你配置的 API；所有 API Key 仅保存在本机 `chrome.storage.local`。设置页按浏览器语言自动切换，右上角提供 `中 / EN` 切换开关。 |
+
+### 🚀 安装方式
+
+#### 方式一：免编译安装包（推荐）
+
+1. 📦 从 Releases 下载 **`scholarclip-ai-v0.1.0.zip`**，解压到一个固定目录。⚠️ 解压后的文件夹内应**直接**包含 `manifest.json`。
+2. 🌐 在 Chrome 地址栏打开 `chrome://extensions/`。
+3. 🛠️ 打开右上角的 **「开发者模式」**。
+4. 📂 点击左上角 **「加载已解压的扩展程序」**，选择刚解压的文件夹。
+5. ⚙️ 首次安装会自动打开设置页，填入下表中的信息后点击 **「测试连接并校验数据库字段」**。
+
+| 类别 | 需要填写 |
+| :--- | :--- |
+| 🤖 LLM | API Base URL · API Key · 模型名 |
+| 📝 Notion | Integration Token · Database ID |
+
+#### 方式二：从源码构建
+
+```bash
+npm install
+npm run build   # 编译产物输出到 dist/
+npm test        # 运行 29 项自动化测试
+```
+
+构建完成后，按上面的步骤在 `chrome://extensions/` 中加载 **`dist/`** 目录即可。
+
+[⬆️ 回到顶部](#readme)
+
+---
+
+<a id="en"></a>
+
+## 🇬🇧 English
+
+> **In one line**: A one-click Chrome extension that extracts scholarly webpages (arXiv, Google Scholar, IEEE Xplore, ACM DL, and general academic articles), generates **hallucination-resistant** structured summaries and **APA 7th / IEEE** citations with any OpenAI-compatible LLM, and saves them straight into your Notion database.
+
+### ✨ Key Features
+
+| | Feature | Details |
+| :---: | :--- | :--- |
+| 🔍 | **Multi-site Academic Extraction** | Dedicated extractors for arXiv, Google Scholar, IEEE Xplore and ACM DL, combined with Highwire (`citation_*`), Dublin Core and Open Graph metadata plus `@mozilla/readability`. Prefers your own text selection (≥200 chars) and blocks empty or paywalled pages to prevent hallucination. |
+| 🛡️ | **Anti-Hallucination & Robust JSON Parsing** | Strict grounding rules forbid fabricating missing metadata or metrics. A balanced-brace state machine, quote-aware control-character sanitization, truncation detection and automatic retry keep parsing reliable — even with reasoning models that emit `<think>` blocks. |
+| ✏️ | **Editable Preview & Citation Copy** | A clean 400px academic popup to review and tweak Title, Authors, Year, Tags, TL;DR, Methodology and Key Findings, with one-click copy for APA 7th / IEEE citations and automatic draft recovery. |
+| 🗂️ | **Adaptive Notion Sync** | Maps both English and Chinese property names (`Title`, `Authors`, `Year`, `URL`, `Tags`, `Citation`, optional `Venue` & `DOI`), skips unconfigured columns, and formats the page body with a Callout, Heading 2 sections and bulleted lists. |
+| 🔒 | **Privacy-First & Bilingual Settings** | No backend servers — requests go directly from Chrome to the APIs you configure, and all keys stay in local `chrome.storage.local`. The Options page follows your browser language and has a `中 / EN` toggle. |
+
+### 🚀 Installation
+
+#### Option 1: Prebuilt Release (no build required)
+
+1. 📦 Download **`scholarclip-ai-v0.1.0.zip`** from Releases and unzip it to a permanent folder. ⚠️ Make sure `manifest.json` sits **directly** inside the extracted folder.
+2. 🌐 Open `chrome://extensions/` in Chrome.
+3. 🛠️ Turn on **Developer mode** (top-right toggle).
+4. 📂 Click **Load unpacked** (top-left) and select the extracted folder.
+5. ⚙️ The Settings page opens on first install. Fill in the fields in the table below, then click **Test Connection & Verify Schema**.
+
+| Category | Fields |
+| :--- | :--- |
+| 🤖 LLM | API Base URL · API Key · Model Name |
+| 📝 Notion | Integration Token · Database ID |
+
+#### Option 2: Build from Source
+
+```bash
+npm install
+npm run build   # Outputs the production bundle to dist/
+npm test        # Runs 29 automated tests
+```
+
+Then load the generated **`dist/`** folder via **Load unpacked** in `chrome://extensions/`.
+
+[⬆️ Back to top](#readme)
+
+---
+
+<p align="center">Made with ☕ for researchers who live in Notion</p>
